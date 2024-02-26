@@ -1,0 +1,101 @@
+<button id="header-burger" type="button">
+{# -STYLE------------------------------------------- #}
+<style>
+	button#header-burger {
+
+		background: var(--main-bg-color);
+		border: none;
+
+		rotate: 180deg;
+		
+
+		position: absolute;
+		width: 60px;
+		height: 60px;
+		top: 5px;
+		right: 5px;
+		transition-duration: 0.5s;
+	  
+		.icon {
+
+			scale: 70%;
+
+		    transition-duration: 0.5s;
+			position: absolute;
+		    height: 8px;
+		    width: 60px;
+		    top: 30px;
+		    background-color: var(--main-text-color);
+	    
+	    &:before{
+
+	    	transition-duration: 0.5s;
+	  		position: absolute;
+	  		width: 60px;
+	  		height: 8px;
+	  		background-color: var(--main-text-color);
+	  		content: "";
+	  		top: -20px;
+
+	  		translate: -30px;
+	    }
+	    
+	    &:after{
+
+	  		transition-duration: 0.5s;
+	  		position: absolute;
+	  		width: 60px;
+	  		height: 8px;
+	  		background-color: var(--main-text-color);
+	  		content: "";
+	  		top: 20px;
+
+	  		translate: -30px;
+	    }
+	}
+	  
+	&.open {
+	    .icon {
+	      	transition-duration: 0.5s;
+	      	background: transparent;
+	      
+	      	&:before{
+	        	transform: rotateZ(45deg) scaleX(1.25) translate(13px, 13px);
+	      	}
+
+	      	&:after{
+	        	transform: rotateZ(-45deg) scaleX(1.25) translate(12px, -12px);
+	      	}
+	    }
+	}
+
+	&:hover {
+	    cursor: pointer;
+	}
+}
+
+@media screen and (min-width: 700px) {
+    button#header-burger {
+    	display: none;
+    }
+}
+</style>
+{# ------------------------------------------------- #}
+
+{# -HTML-------------------------------------------- #}
+
+	<div class="icon"></div>
+	
+{# ------------------------------------------------- #}
+
+{# -JAVASCRIPT-------------------------------------- #}
+<script>
+	const BURGER = document.querySelector('button#header-burger');
+	const MENU = document.querySelector('div#header-links');
+	BURGER.addEventListener('click',()=>{
+  		BURGER.classList.toggle('open');
+  		MENU.classList.toggle('open');
+	});
+</script>
+{# ------------------------------------------------- #}
+</button>

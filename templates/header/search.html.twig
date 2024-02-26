@@ -1,0 +1,84 @@
+<search>
+{# -STYLE------------------------------------------- #}
+<style>
+	search {
+/*		display: none;*/
+
+		position: fixed;
+		top: 2.25rem;
+		right: 7rem;
+
+		overflow: hidden;
+		
+		display: flex;
+
+		button#search-glass {
+			margin-right: .7rem;
+		}
+
+		form {
+			width: calc(100vw - 16rem );
+
+			display: flex;
+
+			input {
+				width: 100%;
+			}
+
+			transition-duration: 0.5s;
+			translate: calc(100vw - 19rem);
+		}
+
+		form.open {
+			translate: 0;
+		}
+
+		button#search-cross {
+			position: absolute;
+			right: .3rem;
+			top: .3rem;
+
+			background: transparent;
+			border: none;
+		}
+	}
+@media screen and (min-width: 700px) {
+    search {
+
+    	form {
+    		width: calc(100vw - 38rem );
+    		translate: calc(100vw - 41rem);
+    	}
+    }   
+}
+</style>
+{# ------------------------------------------------- #}
+
+{# -HTML-------------------------------------------- #}
+<form action="">
+		<button id="search-glass" type="button">Q</button>
+		<label for="search-input" hidden>Find a Movie</label>
+		<input type="search" id="search-input" name="search" placeholder="Find a Movie">
+		<button id="search-cross" type="reset">X</button>
+</form>	
+{# ------------------------------------------------- #}
+
+{# -JAVASCRIPT-------------------------------------- #}
+<script>
+	// Click in
+	const FORM = document.querySelector('search form');
+	const GLASS = document.querySelector('search button#search-glass');
+	GLASS.addEventListener('click',()=>{
+  		FORM.classList.toggle('open');
+	});
+	// Click out
+	const INPUT = document.querySelector('search input');
+	const CROSS = document.querySelector('search button#search-cross');
+	CROSS.addEventListener('click',()=>{
+  		if (INPUT.value == ''){
+  			FORM.classList.toggle('open');
+  		}
+	});
+</script>
+{# ------------------------------------------------- #}
+</search>
