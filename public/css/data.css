@@ -1,0 +1,74 @@
+:root {
+    font-size: 62.5%;
+
+    --main-text-font: Atkinson-Hyperlegible, sans-serif;
+    --main-text-size: 1.6rem;
+    --header-text-size: 1.8rem;
+    --footer-text-size: 1.4rem;
+
+
+    --main-bg-color: MidnightBlue;
+    --light-bg-color: #111;
+
+    --dark-text-color: gray;
+    --main-text-color: darkgray;
+    --light-text-color: lightgray;
+}
+
+* {
+    color: var(--main-text-color);
+    text-decoration: none;
+    list-style: none;
+}
+
+
+
+body {
+
+
+    font-size: var(--main-text-size);
+    font-family: var(--main-text-font);
+
+    background-color: var(--main-bg-color);
+/*    transition: all 0.3s ease-in-out;*/
+}
+
+
+/*
+.dark-mode {
+    --main-bg-color: black;
+    --light-bg-color: #111;
+
+    --dark-text-color: gray;
+    --main-text-color: darkgray;
+    --light-text-color: lightgray;
+
+    --banner-bg-color: green;
+    --banner-text-color: var(--main-text-color);
+}
+
+.light-mode {
+    --main-bg-color: darkgray;
+    --light-bg-color: lightgray;
+
+    --dark-text-color: #000;
+    --main-text-color: #222;
+    --light-text-color: #444;
+
+    --banner-bg-color: green;
+    --banner-text-color: var(--main-text-color);
+}
+
+.green-mode {
+    --main-bg-color: #000100;
+    --light-bg-color: #010;
+
+    --dark-text-color: darkgreen;
+    --main-text-color: green;
+    --light-text-color: lightgreen;
+
+    --main-text-font: UbuntuMono, sans-serif;
+
+    --banner-bg-color: #010;
+    --banner-text-color: var(--main-text-color);
+}*/
