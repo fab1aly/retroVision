@@ -1,4 +1,4 @@
-<dialog open>
+
 {# -STYLE------------------------------------------- #}
 <style>
 #hero {
@@ -94,6 +94,7 @@ a:visited {
 <!-- Buttons -->
 <div>
     <button type="button" onclick="download()">Download</button>
+    {# <button type="button" onclick="stop()">Destroy</button> #}
     <button type="button" onclick="client.destroy();document.querySelector('dialog').close();">Destroy</button>
 </div>
 </div>
@@ -192,7 +193,7 @@ function stop() {
     console.log('test')
     client._server.close()
     client.destroy()
-    // document.querySelector('dialog').close();
+    document.querySelector('dialog').close();
     console.log('test')
 }
 
@@ -223,4 +224,3 @@ navigator.serviceWorker.register('./script/webtorrent/sw.min.js', { scope: './sc
 
 </script>
 {# ------------------------------------------------- #}
-</dialog>
