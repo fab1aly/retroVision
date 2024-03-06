@@ -57,39 +57,25 @@ main {
 
 
     <section>
-        <h2>Category_name</h2>
-            
-        <article>
-            <h3>Film_name</h3>
-            <img src="">
-        </article>
+        <h2>Working progress</h2>
 
-        <article>
-            <h3>Film_name</h3>
-            <img src="">
-        </article>
-
-        <article>
-            <h3>Film_name</h3>
-            <img src="">
-        </article>
-
-        <article>
-            <h3>Film_name</h3>
-            <img src="">
-        </article>
-
-        <article>
-            <h3>Film_name</h3>
-            <img src="">
-        </article>
-
-        <article>
-            <h3>Film_name</h3>
-            <img src="">
-        </article>
+        
 
     </section>
+
+    {# {% for category in categories %}
+    <section>
+        <h2>{{category.name}}</h2>
+
+        {% for film in films %}  
+        <article>
+            <h3>{{film.title}}</h3>
+            <img src={{film.poster}}>
+        </article>
+       {% endfor %}
+
+    </section>
+    {% endfor %} #}
 
 {# ------------------------------------------------- #}
 

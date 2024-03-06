@@ -54,43 +54,43 @@ main {
 
     <section>
         <h2>Category_name</h2>
+
+        {% for film in films %}
             
-        <article>
-            <h3>Film_name</h3>
-            <img src="">
+        <article 
+            onclick="showFilmInDialog(event)";
+            data-test= "{{film.title}}";
+
+            hx-post="/video=123456789h"
+    		hx-trigger="click"
+    		hx-target="dialog"
+    		hx-swap="outerHTML"
+        >
+            <h3>{{film.title}}</h3>
+            <img src={{film.poster}}>
         </article>
 
-        <article>
-            <h3>Film_name</h3>
-            <img src="">
-        </article>
-
-        <article>
-            <h3>Film_name</h3>
-            <img src="">
-        </article>
-
-        <article>
-            <h3>Film_name</h3>
-            <img src="">
-        </article>
-
-        <article>
-            <h3>Film_name</h3>
-            <img src="">
-        </article>
-
-        <article>
-            <h3>Film_name</h3>
-            <img src="">
-        </article>
+       {% endfor %}
 
     </section>
+    <dialog>
+
+    </dialog>
 
 {# ------------------------------------------------- #}
 
 {# -JAVASCRIPT-------------------------------------- #}
 <script>
+
+function showFilmInDialog(event) {
+    const DIALOG_ELEMENT = document.querySelector('dialog');
+    const ARTICLE_ELEMENT = event.target.closest('article');
+
+    const INFO_TEST = ARTICLE_ELEMENT.dataset.test
+
+    // console.log(INFO_TEST);
+    // DIALOG_ELEMENT.showModal();
+}
 
 </script>
 {# ------------------------------------------------- #}
