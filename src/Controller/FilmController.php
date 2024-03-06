@@ -16,10 +16,20 @@ class FilmController extends AbstractController
         $films = $filmRepository->findAll();
         // dd($films);
 
-        return $this->render('main/recent.html.twig', [
-            'controller_name' => 'FilmController',
-            'films' => $films,
-        ]);
+        switch ($request->getMethod()) {
+            case "GET":
+                return $this->render('view/recent.html.twig', [
+                    'controller_name' => 'FilmController',
+                    'films' => $films,
+                ]);
+                break;
+            case "POST":
+                return $this->render('main/recent.html.twig', [
+                    'controller_name' => 'FilmController',
+                    'films' => $films,
+                ]);
+                break;
+        }
     }
 
     #[Route('video={uri}', name: 'film.video', requirements: ['uri' => '[a-z0-9-]+'],)]

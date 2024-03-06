@@ -64,7 +64,7 @@ main {
             hx-post="/video=123456789h"
     		hx-trigger="click"
     		hx-target="dialog"
-    		hx-swap="outerHTML"
+    		hx-swap="innerHTML"
         >
             <h3>{{film.title}}</h3>
             <img src={{film.poster}}>
@@ -89,7 +89,7 @@ function showFilmInDialog(event) {
     const INFO_TEST = ARTICLE_ELEMENT.dataset.test
 
     // console.log(INFO_TEST);
-    // DIALOG_ELEMENT.showModal();
+    DIALOG_ELEMENT.showModal();
 }
 
 </script>
