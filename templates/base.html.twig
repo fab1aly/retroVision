@@ -12,8 +12,28 @@
         {% endblock %}
 
         <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+        {# // <script src="https://momentjs.com/downloads/moment.js"></script> #}
+        <script type="module">
+            // import WebTorrent from 'https://esm.sh/webtorrent'
+            // // import WebTorrent from './script/webtorrent/webtorrent.min.js'
+            // const client = window.client = new WebTorrent()
+        </script>
     </head>
     <body>
         {% block body %}{% endblock %}
     </body>
+    {# // <script>
+    //     navigator.serviceWorker.register('./script/webtorrent/sw.min.js', { scope: './script/' }).then(reg => {
+    //     const worker = reg.active || reg.waiting || reg.installing
+    //     function checkState(worker) {
+    //         return worker.state === 'activated' && client.createServer({ controller: reg }) && download()
+    //     }
+    //     if (!checkState(worker)) {
+    //         worker.addEventListener('statechange', ({ target }) => checkState(target))
+    //     }
+    //     })
+    // </script> #}
 </html>

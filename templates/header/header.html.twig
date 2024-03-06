@@ -92,9 +92,27 @@
 		
 		<nav>
 			<ul>
-				<li><a href="#Home">Home</a></li>
-				<li><a href="#Lastest">Lastest</a></li>
-	    		<li><a href="#Favorite">Favorite</a></li>
+				<li><a hx-post="/home"
+    						hx-trigger="click"
+    						hx-target="main"
+    						hx-swap="outerHTML"
+					>
+						Home
+				</a></li>
+				<li><a hx-post="/recent"
+    						hx-trigger="click"
+    						hx-target="main"
+    						hx-swap="outerHTML"
+					>
+						Recent
+				</a></li>
+	    		<li><a hx-post="/favorite"
+    						hx-trigger="click"
+    						hx-target="main"
+    						hx-swap="outerHTML"
+					>
+						Favorite
+				</a></li>
 	    		
 			</ul>
 		</nav>
