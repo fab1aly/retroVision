@@ -1,0 +1,22 @@
+<dialog>
+{# -STYLE------------------------------------------- #}
+<style>
+    
+</style>
+{# ------------------------------------------------- #}
+
+{# -HTML-------------------------------------------- #}
+
+{# ------------------------------------------------- #}
+
+{# -JAVASCRIPT-------------------------------------- #}
+<script>
+    let dialog_element = document.querySelector('dialog');
+    dialog_element.addEventListener("close", ()=>{
+        for (child of dialog_element.childNodes){
+            dialog_element.removeChild(child)
+        }
+    })
+</script>
+{# ------------------------------------------------- #}
+</dialog>
