@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class FilmController extends AbstractController
 {
-    #[Route('recent', name: 'film.recent')]
+    #[Route('/recent', name: 'film.recent')]
     public function recent(Request $request, FilmRepository $filmRepository): Response
     {
         $films = $filmRepository->findAll();
@@ -38,7 +38,7 @@ class FilmController extends AbstractController
         // $films = $filmRepository->findAll();
         // dd($uri);
 
-        return $this->render('main/video.html.twig', [
+        return $this->render('element/video.html.twig', [
             'controller_name' => 'FilmController',
             'uri' => $uri,
         ]);
