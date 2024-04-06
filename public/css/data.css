@@ -1,18 +1,19 @@
 :root {
     font-size: 62.5%;
 
-    --main-text-font: Atkinson-Hyperlegible, sans-serif;
+    --main-text-font: Atkinson-Hyperlegible, Helvetica, Arial, sans-serif;
     --main-text-size: 1.6rem;
     --header-text-size: 1.8rem;
     --footer-text-size: 1.4rem;
 
 
-    --main-bg-color: MidnightBlue;
-    --light-bg-color: #111;
+    --main-bg-color: #0B0337;
+    --light-bg-color: #2C354D;
+    
 
-    --dark-text-color: gray;
-    --main-text-color: darkgray;
-    --light-text-color: lightgray;
+    --select-text-color: #86B6C5;
+    --main-text-color: #DDC594;
+    --warn-text-color: #E87B40;
 }
 
 * {

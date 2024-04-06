@@ -1,7 +1,7 @@
 <header>
 {# -STYLE------------------------------------------- #}
 <style>
-	header {
+	body>header {
 
 		height: 7rem;
 		border: solid red 1px;
@@ -19,21 +19,21 @@
 			img {
 				width: 7.8rem;
 				border: solid 1px black;
-
-/*					scale: 90%;*/
+/*				scale: 90%;*/
 			}
 		}
 		
-		div#header-links {
+		nav#header-nav {
 
-			
 			border: solid 1px green;
 
 			position: fixed;
 			top: 7rem;
 			right: -11rem;
+			z-index: 100;
 
 			background-color: var(--main-bg-color);
+			opacity: .75;
 
 			display: flex;
 			flex-direction: column-reverse;
@@ -44,7 +44,12 @@
 				right: 0;
 			}
 
-			ul, menu {
+			a {
+				width : fit-content;
+				margin: 1rem;
+			}
+			
+			menu {
 				margin: 0;
 				padding: 0;
 
@@ -53,24 +58,35 @@
 				}
 			}
 		}
+		
 }
 @media screen and (min-width: 700px) {
-	header {
-		
-		div#header-links {
+	body>header {
+
+		display: flex;
+
+		nav#header-nav {
 
 			width: calc(100vw - 8rem);
 			
-			position: unset;
+			position: relative;
 			right: unset;
 			top: unset;
 
+			display: flex;
 			flex-direction: row;
-			justify-content: space-between;
+			align-items: center;
 
-			ul {
-				display: flex;
+			a {
+				width : fit-content;
+				margin: 1rem;
 			}
+
+			menu {
+				position: absolute;
+				right: 0;
+			}
+
 		}
 	}
 }			
@@ -87,46 +103,35 @@
 		<h1 hidden>retroVision</h1>
 	</a>
 	
+	<nav id="header-nav">
+		<a hx-get="/home"
+			hx-trigger="click"
+			hx-target="main"
+			hx-swap="outerHTML"
+			hx-push-url="true"
+		>Home</a>
 
-	<div id="header-links">
+		<a hx-get="/recent"
+			hx-trigger="click"
+			hx-target="main"
+			hx-swap="outerHTML"
+			hx-push-url="true"
+		>Recent</a>
 		
-		<nav>
-			<ul>
-				<li><a hx-post="/home"
-    						hx-trigger="click"
-    						hx-target="main"
-    						hx-swap="outerHTML"
-							hx-push-url="true"
-					>
-						Home
-				</a></li>
-				<li><a hx-post="/recent"
-    						hx-trigger="click"
-    						hx-target="main"
-    						hx-swap="outerHTML"
-							hx-push-url="true"
-					>
-						Recent
-				</a></li>
-	    		<li><a hx-post="/favorite"
-    						hx-trigger="click"
-    						hx-target="main"
-    						hx-swap="outerHTML"
-							hx-push-url="true"
-					>
-						Favorite
-				</a></li>
-	    		
-			</ul>
-		</nav>
-
+		<a hx-get="/favorite"
+			hx-trigger="click"
+			hx-target="main"
+			hx-swap="outerHTML"
+			hx-push-url="true"
+		>Favorite</a>
+	
 		{% include 'header/search.html.twig' %}
 
 		<menu>
 			<li><a href="/login">Log in</a></li>
 		</menu>
+	</nav>
 	
-	</div>
 
 	{% include 'header/burger.html.twig' %}
 {# ------------------------------------------------- #}

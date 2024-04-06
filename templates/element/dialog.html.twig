@@ -1,22 +1,43 @@
-<dialog>
 {# -STYLE------------------------------------------- #}
 <style>
-    
+    dialog {
+        position: relative;
+        width: 80vw;
+        min-height: 50vh;
+        background: var(--main-bg-color);
+
+        button#dialog-cross {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--light-bg-color);
+            color: var(--warn-text-color);
+        }
+    }
+    dialog::backdrop {
+        background: var(--main-bg-color);
+        opacity: .75;
+    } 
 </style>
 {# ------------------------------------------------- #}
 
 {# -HTML-------------------------------------------- #}
-
+<dialog onload="this.addEventListener('close', cleanDialogOutput);">
+    <button id="dialog-cross" onclick="cleanDialogOutput();">X</button>
+    <div id="dialog-output"></div>
+</dialog>
 {# ------------------------------------------------- #}
 
 {# -JAVASCRIPT-------------------------------------- #}
 <script>
-    let dialog_element = document.querySelector('dialog');
-    dialog_element.addEventListener("close", ()=>{
-        for (child of dialog_element.childNodes){
-            dialog_element.removeChild(child)
+    function cleanDialogOutput() {
+        DIALOG = document.querySelector('dialog');
+        DIALOG.close();
+        OUTPUT = DIALOG.querySelector('div#dialog-output');
+        while (OUTPUT.firstChild) {
+            OUTPUT.removeChild(OUTPUT.firstChild);
         }
-    })
+    }
+    // document.querySelector('dialog').addEventListener("close", cleanDialogOutput);
 </script>
 {# ------------------------------------------------- #}
-</dialog>

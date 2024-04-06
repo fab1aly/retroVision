@@ -11,28 +11,43 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class IndexController extends AbstractController
 {
-    #[Route('/', name: 'app_index')]
+    #[Route('/', name: 'index.root')]
     public function index(): Response
     {
-        return $this->render('view/home.html.twig', [
-            'controller_name' => 'IndexController',
-        ]);
+        header('Location: ./home');
+        // or die();
+        exit();
     }
 
-    #[Route('/home', name: 'app_home')]
+    #[Route('/home', name: 'index.home')]
     public function home(Request $request): Response
     {
         switch ($request->getMethod()) {
             case "GET":
-                return $this->render('view/home.html.twig', [
-                    'controller_name' => 'IndexController',
-                ]);
-                break;
-            case "POST":
-                return $this->render('main/home.html.twig', [
-                    'controller_name' => 'IndexController',
-                ]);
-                break;
+                if ($request->headers->get('HX-Request')){
+                    return $this->render('main/home.html.twig', [
+                        'controller_name' => 'IndexController',
+                    ]);
+                }
+        
+                else {
+                    return $this->render('view/home.html.twig', [
+                        'controller_name' => 'IndexController',
+                    ]);
+                }
+            break;
+
+            // case "POST":
+            //     return $this->render('view/home.html.twig', [
+            //         'controller_name' => 'IndexController',
+            //     ]);
+            //     break;
+
+            default:
+                header("Location: /home");
+                // or die();
+                exit();
+            break;
         }
     }
 }

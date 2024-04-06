@@ -1,4 +1,4 @@
-<main>
+<main >
 {# -STYLE------------------------------------------- #}
 <style>
 main {
@@ -13,7 +13,6 @@ main {
             height: 2rem;
             margin: 1rem 0;
             user-select: none;
-
         }
 
         display: flex;
@@ -21,8 +20,7 @@ main {
         flex-wrap: wrap;
         justify-content: center;
 
-
-        article {
+        article.film-thumb {
             border: solid 1px green;
 
 /*            height: 25rem;*/
@@ -43,52 +41,44 @@ main {
             }
         }
     }
-}
-
-    
+} 
 </style>
 {# ------------------------------------------------- #}
 
 {# -HTML-------------------------------------------- #}
+<section>
+    <h2>Recent</h2>
 
+    {% for film in films %}
+        
+    <article class='film-thumb'
+        
+        hx-get="/film={{film.imdbID}}"
+        hx-trigger="click"
+        hx-target="main"
+        hx-swap="outerHTML"
+        hx-push-url="true"
+    >
+        <h3>{{film.title}}</h3>
+        <img src={{film.poster}} alt="poster of {{film.title}}">
+    </article>
 
-    <section>
-        <h2>Category_name</h2>
+    {% endfor %}
 
-        {% for film in films %}
-            
-        <article 
-            onclick="showFilmInDialog(event)";
-            data-test= "{{film.title}}";
-
-            hx-post="/video=b061491677f17718c29a9b42068b61ba61b52d28"
-    		hx-trigger="click"
-    		hx-target="dialog"
-    		hx-swap="innerHTML"
-        >
-            <h3>{{film.title}}</h3>
-            <img src={{film.poster}}>
-        </article>
-
-       {% endfor %}
-
-    </section>
-
-    
+</section> 
 {# ------------------------------------------------- #}
 
 {# -JAVASCRIPT-------------------------------------- #}
 <script>
 
-function showFilmInDialog(event) {
-    const DIALOG_ELEMENT = document.querySelector('dialog');
-    const ARTICLE_ELEMENT = event.target.closest('article');
+// function showInDialog(event) {
+//     PREVIOUS_URL = window.location.href
+//     document.querySelector('dialog').showModal();
 
-    const INFO_TEST = ARTICLE_ELEMENT.dataset.test
-
-    // console.log(INFO_TEST);
-    DIALOG_ELEMENT.showModal();
-}
+//     // const ARTICLE_ELEMENT = event.target.closest('article');
+//     // const INFO_TEST = ARTICLE_ELEMENT.dataset.test
+//     // console.log(INFO_TEST);  
+// }
 
 </script>
 {# ------------------------------------------------- #}
