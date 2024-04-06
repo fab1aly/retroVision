@@ -1,0 +1,37 @@
+<main>
+{# -STYLE------------------------------------------- #}
+<style>
+    article#film-detail{
+        button{
+            background-color:var(--light-bg-color);
+        }
+    }
+</style>
+{# ------------------------------------------------- #}
+
+{# -HTML-------------------------------------------- #}
+<article id="film-detail">
+    <header>
+        <h2>{{film.title}}</h2>
+    </header>
+    <main>
+        <p>bla bla ...</p>
+        <button onclick="document.querySelector('dialog').showModal();"
+        
+            hx-get="/video={{film.imdbID}}"
+    		hx-trigger="click"
+    		hx-target="div#dialog-output"
+    		hx-swap="innerHTML"
+
+        >Regarder</button>
+        
+    </main>
+</article>
+{# ------------------------------------------------- #}
+
+{# -JAVASCRIPT-------------------------------------- #}
+<script>
+    
+</script>
+{# ------------------------------------------------- #}
+</main>
