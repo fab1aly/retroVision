@@ -59,7 +59,7 @@
 {# ------------------------------------------------- #}
 
 {# -HTML-------------------------------------------- #} 
-<template id="video-webtorrent-template">  
+<template id="video-webtorrent">  
     <div id="hero">
         <div id="output">
             <div id="progressBar"></div>
@@ -100,11 +100,7 @@
     class VideoWebTorrent extends HTMLElement {
         constructor () {
             super();
-
-                let template = document.querySelector('template#video-webtorrent-template')
-                let templateContent = template.content.cloneNode(true);
-
-            this.appendChild(templateContent)
+            this.appendChild(document.querySelector('template#video-webtorrent').content.cloneNode(true))
         }
 
         connectedCallback() {
@@ -216,9 +212,7 @@
             }
             if (client) {
                 client.destroy()
-            }
-            
-            
+            }   
         }
     }
 
