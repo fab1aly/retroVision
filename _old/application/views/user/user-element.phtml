@@ -1,0 +1,48 @@
+<details id="user-detail" class="dropdown"
+    hx-swap-oob="true"
+    x-data="{ 
+        openDropdown: <?= (isset($get_request) || isset($user_response_status)) ? 'true' : 'false' ?>, 
+    }"
+    x-ref="dropdown"
+    x-on:click.outside="openDropdown = false"
+    <?= (isset($get_request) || isset($user_response_status)) ? 'x-init="$refs.dropdown.open = true"' : '' ?>>
+
+    <summary>
+        <?= (isset($_SESSION['user'])) ? 'Account' : 'Welcome' ?>
+    </summary>
+    <ul id="user_links">
+        <?php if (isset($_SESSION['user'])): ?>
+            <li id="user_profile_link">
+                <a href="/profile"
+                    hx-boost=true
+                    hx-push-url="false"
+                    hx-trigger="click"
+                    hx-target="#user_dialog_main"
+                    hx-swap="innerHTML"
+                    hx-vals='{"user_request": "user_profile"}'
+                    x-on:click="$refs.dialog.showModal()">
+                    Profile
+                </a>
+            </li>
+            <li><a href="#">Favorite</a></li>
+            <li><a href="/sign-out">Logout</a></li>
+        <?php else: ?>
+            <li id="sign_in_link"><a href="/sign-in"
+                    hx-boost=true
+                    hx-push-url="false"
+                    hx-target="#user_dialog_main"
+                    hx-swap="innerHTML"
+                    hx-vals='{"user_request": "sign_in"}'
+                    x-on:click="$refs.dialog.showModal()">Sign In</a></li>
+            <li id="sign_up_link"><a href="/sign-up"
+                    hx-boost=true
+                    hx-push-url="false"
+                    hx-target="#user_dialog_main"
+                    hx-swap="innerHTML"
+                    hx-vals='{"user_request": "sign_up"}'
+                    x-on:click="$refs.dialog.showModal()">Sign Up</a></li>
+        <?php endif; ?>
+    </ul>
+
+
+</details>

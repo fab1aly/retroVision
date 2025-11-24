@@ -1,0 +1,1 @@
+[2025-11-23 21-20-37] Latte\TemplateNotFoundException: Missing template file '/home/fabien/Code/retroVision/app/config/../viewstest'. in /home/fabien/Code/retroVision/vendor/latte/latte/src/Latte/Loaders/FileLoader.php:41  @  CLI (PID: 3047724): app/test_boot.php  @@  exception--2025-11-23--21-20--b0ee050ae3.html

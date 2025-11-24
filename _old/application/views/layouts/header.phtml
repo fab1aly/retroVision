@@ -1,0 +1,38 @@
+<!-- <HEADER> -->
+<nav>
+	<ul id="nav_logo">
+		<li>
+			<a href="/">
+				<h1>retroVision</h1>
+			</a>
+		</li>
+	</ul>
+	<ul id="nav_search">
+		<li>
+			<form role="search">
+				<input name="search" type="search" placeholder="THX 1138" aria-label="Search" />
+				<input type="submit" value="Search" />
+			</form>
+		</li>
+	</ul>
+	<ul id="nav_menu">
+		<li id="nav_menu_buttons" role="group">
+			<button hx-get="/home"
+				hx-trigger="click"
+				hx-target="main"
+				hx-swap="innerHTML"
+				hx-push-url="true">News</button>
+			<button>Top</button>
+			<button>Trend</button>
+		</li>
+		<li id="nav_menu_user" x-data="{}">
+			<?php include '../application/views/user/user-element.phtml'; ?>
+			<?php include '../application/views/user/user-dialog.phtml'; ?>
+		</li>
+	</ul>
+</nav>
+<script>
+
+</script>
+<!-- <hr /> -->
+<!-- </HEADER> -->

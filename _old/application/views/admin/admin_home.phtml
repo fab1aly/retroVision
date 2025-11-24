@@ -1,0 +1,171 @@
+<section id="film_view">
+	<article class="overflow-auto">
+		<header>
+			<h2 class="pico-color-pumpkin-300">All Films</h2>
+		</header>
+		<main class="overflow-auto">
+			<table class="striped">
+				<thead>
+					<tr>
+						<th scope="col">Slug</th>
+						<th scope="col">ImdbID</th>
+						<th scope="col">Date of registration</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($film_array as $film) : ?>
+						<tr>
+							<td><?= $film['slug'] ?></td>
+							<td><?= $film['imdbID'] ?></td>
+							<td><?= $film['date_creat'] ?></td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th scope="row">Total</th>
+						<td></td>
+						<td><?= count($film_array) ?></td>
+					</tr>
+				</tfoot>
+			</table>
+		</main>
+		<footer>
+			<details role="button" class="secondary">
+				<summary>
+					<span class="pico-color-pumpkin-100">Add Film</span>
+				</summary>
+				<form>
+					<fieldset role="group">
+						<input id="slug"
+							type="text" name="slug" placeholder="Slug"
+							oninput="if (this.value.length>=3) { getOMDbData(); };">
+						<input id="year"
+							type="number" name="year" placeholder="Year"
+							maxlength="4" style="flex-basis: 6.5em;"
+							alt="Helping search on OMDb API"
+							data-tooltip="Helping search on OMDb API">
+					</fieldset>
+
+					<input id="imdbID"
+						type="text" name="imdbID"
+						placeholder="ImdbID">
+					<textarea id="json"
+						type="text" name="json"
+						placeholder="JSON"
+						rows="4" readonly></textarea>
+					<textarea id="plot"
+						type="text" name="plot"
+						placeholder="Plot"
+						rows="5" readonly></textarea>
+
+					<button type="submit">
+						<span class="pico-color-pumpkin-200">Add</span>
+					</button>
+				</form>
+				<script>
+					async function getOMDbData() {
+						slug = document.querySelector('form #slug').value;
+						year = document.querySelector('form #year').value;
+						data = await fetch(`https://www.omdbapi.com/?apikey=<?= $OMDbAPIKey ?>&t=${slug}&y=${year}`).then(response => response.json());
+						plot = await fetch(`https://www.omdbapi.com/?apikey=<?= $OMDbAPIKey ?>&t=${slug}&y=${year}&plot=full`).then(response => response.json()).then(data => data.Plot);
+						setOMDbData();
+					}
+
+					function setOMDbData() {
+						document.querySelector('form #imdbID').value = data.imdbID;
+						document.querySelector('form #json').value = JSON.stringify(data);
+						document.querySelector('form #plot').value = plot;
+					}
+				</script>
+			</details>
+		</footer>
+	</article>
+</section>
+<section id="torrent_view">
+	<article class="">
+		<header class="">
+			<h2 class="pico-color-pumpkin-200">Torrents</h2>
+		</header>
+		<main class="overflow-auto">
+			<table class="striped">
+				<thead>
+					<tr>
+						<th scope="col">Address</th>
+						<th scope="col">Filename</th>
+						<th scope="col">Hash</th>
+						<th scope="col">Date of registration</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($torrent_array as $torrent) : ?>
+						<tr>
+							<td><?= $torrent['address'] ?></td>
+							<td><?= $torrent['filename'] ?></td>
+							<td><?= $torrent['hash'] ?></td>
+							<td><?= $torrent['date_creat'] ?></td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th scope="row">Total</th>
+						<td><?= count($torrent_array) ?></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tfoot>
+			</table>
+		</main>
+		<footer>
+			<details role="button" class="secondary">
+				<summary>
+					Add Torrent
+				</summary>
+				<form>
+					<input type="text" name="address" placeholder="Address">
+					<input type="text" name="filename" placeholder="Filename">
+
+					<button type="submit">Add</button>
+				</form>
+			</details>
+		</footer>
+	</article>
+</section>
+<section id="user_view">
+	<article>
+		<header>
+			<h2 class="pico-color-pumpkin-100">Users</h2>
+		</header>
+		<main class="overflow-auto">
+			<table class="striped">
+				<thead>
+					<tr>
+						<th scope="col">Email</th>
+						<th scope="col">Username</th>
+						<th scope="col">Date of registration</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($user_array as $user) : ?>
+						<tr>
+							<td><?= $user['email'] ?></td>
+							<td><?= $user['username'] ?></td>
+							<td><?= $user['date_creat'] ?></td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th scope="row">Total</th>
+						<td></td>
+						<td><?= count($user_array) ?></td>
+					</tr>
+				</tfoot>
+			</table>
+		</main>
+		<footer>
+		</footer>
+	</article>
+
+</section>

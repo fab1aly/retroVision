@@ -1,0 +1,102 @@
+<form id="user_form"
+    hx-post="/<?= str_replace("_", "-", $user_request) ?>"
+
+    hx-trigger="submit"
+    hx-target="#user_dialog_main"
+    hx-swap="innerHTML"
+
+    x-ref="form">
+
+    <fieldset>
+        <legend class="container-fluid">
+            <?= ($user_request === 'sign_up') ? 'Sign Up' : '' ?>
+            <?= ($user_request === 'sign_in') ? 'Sign In' : '' ?>
+            <?= ($user_request === 'sign_forget') ? 'Forget Password' : '' ?>
+            <?= ($user_request === 'user_profile') ? ' Update Profile' : '' ?>
+        </legend>
+
+        <?php if ($user_request === 'sign_up' || $user_request === 'user_profile'): ?>
+            <label for="username_form">
+                Username
+                <input id="username_form"
+                    title="Please enter your username"
+                    type="text"
+                    name="<?= ($user_request !== "user_profile") ? 'username' : 'new_username' ?>"
+                    placeholder="<?= ($user_request === 'user_profile') ? htmlspecialchars($_SESSION['user']->getUsername()) : '' ?>"
+                    value="<?= ($_SESSION['formSignData']['username']) ?? '' ?>"
+                    <?= ($user_request !== "user_profile") ? 'required' : '' ?>>
+            </label>
+        <?php endif; ?>
+
+        <label for="email_form">
+            Email
+            <input id="email_form"
+                title="Please enter your email"
+                type="email"
+                name="<?= ($user_request !== "user_profile") ? 'email' : 'new_email' ?>"
+                placeholder="<?= ($user_request === 'user_profile') ? htmlspecialchars($_SESSION['user']->getEmail()) : "you@home.me" ?>"
+                value="<?= ($_SESSION['formSignData']['email']) ?? '' ?>"
+                <?= ($user_request !== "user_profile") ? 'required' : '' ?>>
+        </label>
+
+        <?php if ($user_request !== 'sign_forget'): ?>
+            <label for="password_form">
+                <?= ($user_request === "user_profile") ? 'New Password' : 'Password' ?>
+                <input id="password_form"
+                    title="Please enter your password"
+                    type="password"
+                    name="<?= ($user_request === "user_profile") ? 'new_password' : 'password' ?>"
+                    placeholder="********"
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(.{8,})$"
+                    value="<?= $_SESSION['formSignData']['password'] ?? '' ?>"
+                    <?= ($user_request !== "user_profile") ? 'required' : '' ?>>
+            </label>
+        <?php endif; ?>
+
+        <?php if ($user_request === 'sign_up' || $user_request === 'user_profile'): ?>
+            <label for="password_confirm_form">
+                Confirm
+                <input id="password_confirm_form"
+                    title="Please confirm your password"
+                    type="password"
+                    name="<?= ($user_request !== "user_profile") ? 'password_confirm' : 'new_password_confirm' ?>"
+                    placeholder=""
+                    <?= ($user_request !== "user_profile") ? 'required' : '' ?>>
+            </label>
+        <?php endif; ?>
+    </fieldset>
+
+    <button type="submit" hx-on:submit="this.setAttribute('aria-busy','true');">
+        <?= ($user_request === "user_profile") ? 'Update' : 'Submit' ?>
+    </button>
+
+    <hr>
+
+    <?php if ($user_request === "user_profile"): ?>
+        <button type="button"
+            class="pico-background-red-600 pico-color-white"
+            hx-trigger="click"
+            hx-delete="/profile"
+            hx-target="#user_dialog_main"
+            hx-swap="innerHTML"
+            hx-vals="js:{password: prompt('Please enter your password to confirm')}"
+            hx-on:click=""
+            hx-confirm="Are you sure you want to delete your account?"
+            hx-on:htmx:after-request="this.setAttribute('aria-busy','true');">
+            <i class="fa-solid fa-arrows-rotate"></i><span>Delete Account</span>
+        </button>
+    <?php else : ?>
+        <a href="/<?= ($user_request === 'sign_up') ? 'sign-in' : '' ?><?= ($user_request === 'sign_in') ? 'sign-forget' : '' ?><?= ($user_request === 'sign_forget') ? 'sign-up' : ''  ?>"
+            hx-boost="true"
+            hx-push-url="false"
+            hx-target="#user_dialog_main"
+            hx-swap="innerHTML">
+            <span>
+                <?= ($user_request === 'sign_up') ? 'Or sign-in here' : '' ?>
+                <?= ($user_request === 'sign_in') ? 'Forgot password' : '' ?>
+                <?= ($user_request === 'sign_forget') ? 'Or sign-up here' : ''  ?>
+            </span>
+        </a>
+    <?php endif; ?>
+
+</form>

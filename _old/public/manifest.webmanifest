@@ -1,0 +1,28 @@
+{
+    "lang": "en",
+    "name": "retroVision.ovh ",
+    "short_name": "retroVision",
+    "start_url": "./",
+    "display": "standalone",
+    "scope": "./",
+    "theme_color": "Indigo",
+    "background_color": "Pumpkin",
+    "icons": [
+        {
+            "src": "image/icons8-marker-768.png",
+            "sizes": "768x768",
+            "type": "image/png"
+        }
+    ],
+    "description": "The application for watch retro movies from Internet Archive !",
+    "categories": [
+        "entertainment"
+    ],
+    "screenshots": [
+        {
+            "src": "image/sc-enroute-405x756.jpg",
+            "sizes": "405x756",
+            "type": "image/jpg"
+        }
+    ]
+}

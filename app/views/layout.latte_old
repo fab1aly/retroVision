@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="language" content="en">
+	<meta name="robots" content="index, follow">
+
+	<meta name="author" content="fab1aly">
+	<meta name="description" content="Old lovely films from internetarchive.org.">
+	<meta name="keywords" content="film, cinema, movie, video, streaming, free, download, watch, online">
+
+	<link rel="icon" href="/image/logo.png">
+
+	<!-- PicoCSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.indigo.min.css">
+
+	<!-- HTMX -->
+	<script src="https://unpkg.com/htmx.org@2.0.4"></script>
+
+	<!-- AlpineJS -->
+	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+	<title>{$title ?? 'retroVision'}</title>
+</head>
+
+<body class="pico-background-indigo-800">
+	<header class="container-fluid">
+		<nav>
+			<ul id="nav_logo">
+				<li>
+					<a href="/">
+						<h1>retroVision</h1>
+					</a>
+				</li>
+			</ul>
+			<ul id="nav_search">
+				<li>
+					<form role="search">
+						<input name="search" type="search" placeholder="THX 1138" aria-label="Search" />
+						<input type="submit" value="Search" />
+					</form>
+				</li>
+			</ul>
+			<ul id="nav_menu">
+				<li id="nav_menu_buttons" role="group">
+					<button hx-get="/home" hx-trigger="click" hx-target="main" hx-swap="innerHTML" hx-push-url="true">News</button>
+					<button>Top</button>
+					<button>Trend</button>
+				</li>
+				<li id="nav_menu_user" x-data="{}">
+                    {ifset $user}
+                        <a href="/profile" role="button">{$user->username}</a>
+                        <a href="/logout" role="button" class="secondary">Logout</a>
+                    {else}
+                        <a href="/login" role="button">Login</a>
+                        <a href="/register" role="button" class="secondary">Register</a>
+                    {/ifset}
+				</li>
+			</ul>
+		</nav>
+	</header>
+
+	<main class="container">
+		{block content}{/block}
+	</main>
+
+	<footer class="container-fluid">
+		<hr />
+		<nav>
+			<ul>
+				<li class="pico-color-pumpkin-200">
+					© 2025 Fabolous Labs.
+				</li>
+			</ul>
+		</nav>
+	</footer>
+</body>
+
+</html>

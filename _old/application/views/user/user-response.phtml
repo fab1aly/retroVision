@@ -1,0 +1,15 @@
+<p id="user_response_status"
+    x-ref="status"
+
+    x-init="<?= ($user_request === 'sign_up') ? 'signUp' : '' ?><?= ($user_request === 'sign_in') ? 'signIn' : '' ?><?= ($user_request === 'sign_forget') ? 'signForget' : ''  ?><?= ($user_request === 'user_profile') ? 'userProfile' : '' ?><?= ($user_request === 'user_delete') ? 'userDelete' : ''  ?>Form('<?= $user_response_status ?>')">
+
+    <?php include '../application/views/elements/' . $user_response_status . '.phtml'; ?>
+    <span><?= ucfirst($user_response_status) ?></span>
+</p>
+
+<?php if (($user_request === 'sign_in' && $user_response_status === 'success') || ($user_request === 'user_delete' && $user_response_status === 'success')): ?>
+    <!--User Detail Out of Band Swap-->
+    <?php include '../application/views/user/user-element.phtml'; ?>
+<?php else : ?>
+    <?php include '../application/views/user/user-form.phtml'; ?>
+<?php endif; ?>

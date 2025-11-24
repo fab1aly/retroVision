@@ -1,0 +1,220 @@
+@layer framework {
+    @layer data {
+        :root {
+            color-scheme: light dark;
+
+            --black-color: #222;
+            --grey-color: DimGray;
+            --gray-color: Gainsboro;
+            --cream-color: AntiqueWhite;
+            --white-color: WhiteSmoke;
+
+            --blue-color: LightSteelBlue;
+            --cyan-color: Lightblue;
+            --green-color: DarkSeaGreen;
+            --yellow-color: Moccasin;
+            --orange-color: Orange;
+            --red-color: Tomato;
+            --pink-color: LightPink;
+            --purple-color: Thistle;
+
+        }
+    }
+
+    @layer reset {
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        img,
+        picture,
+        svg,
+        video {
+            display: block;
+            max-width: 100%;
+        }
+
+        input,
+        textarea,
+        button,
+        select {
+            font: inherit;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--black-color);
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        button {
+            border: none;
+            background-color: transparent;
+        }
+    }
+
+    @layer base {
+        :root {
+            font-size: clamp(.8rem, 0.5vw + .8rem, 1rem);
+        }
+
+        body {
+            font-family: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            color: var(--black-color);
+            background-color: var(--yellow-color);
+            width: 100vw;
+            height: 100vh;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            line-height: 1.2;
+            margin-block: 1em;
+        }
+    }
+
+    @layer utilities {
+
+        @layer color {
+            [class*="bgcolor-"] {
+                color: light-dark(var(--black-color), var(--white-color));
+                background-color: light-dark(var(--element-color), var(--black-color));
+                border-style: solid;
+                border-width: 1px;
+                border-color: light-dark(color(from var(--grey-color) srgb r g b / .6), var(--element-color));
+                border-radius: .4rem;
+                box-shadow: rgba(50, 50, 93, 0.5) 0px 2px 5px -1px, rgba(0, 0, 0, 0.53) 0px 1px 3px -1px;
+
+                @media (prefers-color-scheme: dark) {
+                    box-shadow: color-mix(in srgb, var(--element-color) 30%, var(--black-color)) 0px 30px 60px -12px inset, rgba(0, 0, 0, 1) 0px 18px 36px -18px inset;
+                }
+            }
+
+            .bgcolor-green {
+                --element-color: var(--green-color);
+            }
+
+            .bgcolor-red {
+                --element-color: var(--red-color);
+            }
+
+            .bgcolor-cyan {
+                --element-color: var(--cyan-color);
+            }
+
+            .bgcolor-blue {
+                --element-color: var(--blue-color);
+            }
+
+            .bgcolor-yellow {
+                --element-color: var(--yellow-color);
+            }
+
+
+            .bgcolor-white {
+                --element-color: var(--white-color);
+            }
+
+            .bgcolor-gray {
+                --element-color: var(--gray-color);
+            }
+
+            .bgcolor-grey {
+                --element-color: var(--grey-color);
+            }
+
+            .bgcolor-black {
+                --element-color: var(--black-color);
+                color: light-dark(var(--white-color), var(--yellow-color));
+            }
+
+
+
+            .border-none {
+                border-color: light-dark(transparent, var(--element-color));
+            }
+
+            .shadow-none {
+                box-shadow: none;
+            }
+        }
+
+        @layer form {
+            @layer button {
+                .form-button {
+                    margin: .5rem;
+                    padding: .25rem .5rem;
+
+                    width: fit-content;
+                    padding-left: 1rem;
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    i {
+                        margin: 0 .5rem;
+                    }
+                }
+            }
+
+            @layer hover {
+                [class*="hover-"]:hover {
+                    border-color: light-dark(var(--black-color), var(--hover-color));
+
+                    i {
+                        color: var(--hover-color);
+                    }
+                }
+
+                .hover-green:hover {
+                    --hover-color: var(--green-color);
+                }
+
+                .hover-red:hover {
+                    --hover-color: var(--red-color);
+                }
+            }
+
+
+            @layer input {
+                .form-input {
+                    color: light-dark(var(--black-color), var(--white-color));
+                }
+
+                .form-input::placeholder {
+                    color: light-dark(var(--black-color), var(--gray-color));
+                    font-style: italic;
+                    opacity: 0.4;
+                }
+
+                .form-input,
+                .form-input:active:hover {
+                    background-color: light-dark(var(--white-color), var(--black-color));
+                    outline: none;
+                }
+
+                .form-input:hover:not(:focus-visible) {
+                    background-color: light-dark(var(--cream-color), var(--grey-color));
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="language" content="en">
+	<meta name="robots" content="index, follow">
+
+	<meta name="author" content="fab1aly">
+	<meta name="description" content="Old lovely films from internetarchive.org.">
+	<meta name="keywords" content="film, cinema, movie, video, streaming, free, download, watch, online">
+
+	<!--Favicon-->
+	<link rel="icon" href="/image/logo.png">
+	<!-- PWA -->
+	<!-- <link rel="manifest" href="manifest.webmanifest" /> -->
+
+	<!--CSS-->
+	<!-- <link rel="stylesheet" href="css/style.css" type="text/css"> -->
+	<!--Script Fontawesome-->
+	<!-- <script src="https://kit.fontawesome.com/fdc6c3e4a2.js" crossorigin="anonymous"></script> -->
+
+	<!-- PicoCSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.indigo.min.css">
+
+	<!-- HTMX -->
+	<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.js" integrity="sha384-ezjq8118wdwdRMj+nX4bevEi+cDLTbhLAeFF688VK8tPDGeLUe0WoY2MZtSla72F" crossorigin="anonymous"></script>
+
+	<!-- AlpineJS -->
+	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
+	<title>{$title ?? 'retroVision'}</title>
+</head>
+
+<body class="pico-background-indigo-800">
+	{include 'layout/header.latte'}
+
+	{$mainContent|noescape}
+
+	{include 'layout/footer.latte'}
+
+	{include 'layout/script.latte'}
+</body>
+
+</html>

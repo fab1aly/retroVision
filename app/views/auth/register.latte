@@ -1,0 +1,56 @@
+{layout '../layout.latte'}
+
+{block content}
+<form method="post" action="/api/register">
+    <fieldset>
+        <legend class="container-fluid">Sign Up</legend>
+
+        <label for="username_form">
+            Username
+            <input id="username_form"
+                title="Please enter your username"
+                type="text"
+                name="username"
+                required>
+        </label>
+
+        <label for="email_form">
+            Email
+            <input id="email_form"
+                title="Please enter your email"
+                type="email"
+                name="email"
+                placeholder="you@home.me"
+                required>
+        </label>
+
+        <label for="password_form">
+            Password
+            <input id="password_form"
+                title="Please enter your password"
+                type="password"
+                name="password"
+                placeholder="********"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(.{8,})$"
+                required>
+        </label>
+
+        <label for="password_confirm_form">
+            Confirm
+            <input id="password_confirm_form"
+                title="Please confirm your password"
+                type="password"
+                name="password_confirm"
+                required>
+        </label>
+    </fieldset>
+
+    <button type="submit">Sign Up</button>
+
+    <hr>
+
+    <a href="/login">
+        <span>Or sign-in here</span>
+    </a>
+</form>
+{/block}

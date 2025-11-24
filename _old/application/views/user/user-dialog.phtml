@@ -1,0 +1,19 @@
+<dialog id="user_dialog"
+    x-ref="dialog"
+    x-on:click.outside=""
+    <?= isset($get_request) ? 'x-init="$refs.dialog.showModal()"' : '' ?>>
+    <article>
+        <header>
+            <button x-on:click="$refs.dialog.close()" aria-label="Close" rel="prev"></button>
+            <p>
+                <strong><?= (isset($_SESSION['user'])) ? "Account" : 'Welcome' ?></strong>
+            </p>
+        </header>
+
+        <main id="user_dialog_main">
+            <?php if (isset($get_request)): ?>
+                <?php include 'user-form.phtml'; ?>
+            <?php endif; ?>
+        </main>
+    </article>
+</dialog>

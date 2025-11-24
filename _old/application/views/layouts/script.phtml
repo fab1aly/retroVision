@@ -1,0 +1,161 @@
+<script src="script/script.js"></script>
+
+<!-- SERVICE WORKER -->
+<!-- <script>
+    if ("serviceWorker" in navigator) {
+        console.log("hello worker !");
+        navigator.serviceWorker.register("script/service.js");
+    }
+</script> -->
+
+<!-- DIALOG MANAGEMENT -->
+<script>
+    // function openDialog(id) {
+    //     dialog = document.querySelector("dialog#" + id)
+    //     if (dialog) {
+    //         dialog.showModal()
+    //     }
+    // }
+    function closeDialogJS() {
+        dialog = document.querySelector("dialog[open]")
+        if (dialog) {
+            dialog.close()
+        };
+    }
+
+    function openDialog() {
+        $refs.dialog.showModal();
+    }
+
+    function closeDialog() {
+        this.$refs.dialog.close();
+    }
+
+    // function dialogController() {
+    //     return {
+    //         openDialog() {
+    //             this.$refs.dialog.showModal();
+    //         },
+    //         closeDialog() {
+    //             this.$refs.dialog.close();
+    //         }
+    //     }
+    // }
+
+    // USER SIGN IN / SIGN UP FORM STATUS MANAGEMENT ---------------------------------------------------------------
+
+    // function closeStatus() {
+    //     $refs.status.hidden = true;
+    // }
+
+    // function showForm() {
+    //     $refs.form.hidden = false;
+    // }
+
+    // function hideForm() {
+    //     $refs.form.hidden = true;
+    // }
+
+    // function statusToForm(status) {
+    //     switch (status) {
+    //         case "success":
+    //             setTimeout(() => {
+    //                 closeDialogJS();
+    //             }, 500);
+    //             break;
+
+    //         case "error":
+    //             hideForm();
+    //             setTimeout(() => {
+    //                 closeStatus();
+    //                 showForm();
+    //             }, 750);
+    //             break;
+    //     }
+    // }
+
+
+    //////
+
+    function hideStatusToForm(form) {
+        const FORM = document.querySelector('#' + form);
+        const STATUS = document.querySelector('#user_response_status');
+        if (FORM) {
+            FORM.hidden = true;
+        }
+        setTimeout(() => {
+            if (STATUS) {
+                STATUS.hidden = true;
+            }
+            if (FORM) {
+                FORM.hidden = false;
+            }
+        }, 750);
+    }
+
+    function signInForm(status) {
+        switch (status) {
+            case "success":
+                console.log("signInForm success")
+                hideStatusToForm('user_form')
+                setTimeout(() => {
+                    closeDialogJS();
+                }, 500);
+                break;
+
+            case "error":
+                hideStatusToForm('user_form');
+                break;
+        }
+    }
+
+    function signUpForm(status) {
+        switch (status) {
+            case "success":
+                hideStatusToForm('user_form');
+                break;
+
+            case "error":
+                hideStatusToForm('user_form');
+                break;
+        }
+    }
+
+    function signForgetForm(status) {
+        switch (status) {
+            case "success":
+                hideStatusToForm('user_form');
+                break;
+
+            case "error":
+                hideStatusToForm('user_form');
+                break;
+        }
+    }
+
+    function userProfileForm(status) {
+        switch (status) {
+            case "success":
+                hideStatusToForm('user_form');
+                break;
+
+            case "error":
+                hideStatusToForm('user_form');
+                break;
+        }
+    }
+
+    function userDelete(status) {
+        switch (status) {
+            case "success":
+                setTimeout(() => {
+                    closeDialog('user_dialog');
+                }, 500);
+                break;
+
+            case "error":
+                hideStatusToForm('user_form');
+                break;
+        }
+    }
+</script>

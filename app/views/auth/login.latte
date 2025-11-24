@@ -1,0 +1,37 @@
+{layout '../layout.latte'}
+
+{block content}
+<form method="post" action="/api/login">
+    <fieldset>
+        <legend class="container-fluid">Sign In</legend>
+
+        <label for="email_form">
+            Email
+            <input id="email_form"
+                title="Please enter your email"
+                type="email"
+                name="email"
+                placeholder="you@home.me"
+                required>
+        </label>
+
+        <label for="password_form">
+            Password
+            <input id="password_form"
+                title="Please enter your password"
+                type="password"
+                name="password"
+                placeholder="********"
+                required>
+        </label>
+    </fieldset>
+
+    <button type="submit">Sign In</button>
+
+    <hr>
+
+    <a href="/register">
+        <span>Or sign-up here</span>
+    </a>
+</form>
+{/block}
