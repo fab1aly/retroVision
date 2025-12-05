@@ -48,4 +48,39 @@ class User
     {
         return password_verify($password, $this->password);
     }
+
+    public function emailExists(string $email): bool
+    {
+        return $this->findByEmail($email) !== null;
+    }
+
+    public function update(int $id, array $data): void
+    {
+        $fields = [];
+        $params = [':id' => $id];
+
+        foreach ($data as $key => $value) {
+            $fields[] = "$key = :$key";
+            $params[":$key"] = $value;
+        }
+
+        if (empty($fields)) {
+            return;
+        }
+
+        $sql = "UPDATE Users SET " . implode(', ', $fields) . " WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
+    }
+
+    public function delete(int $id): void
+    {
+        $stmt = $this->db->prepare("DELETE FROM Users WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+    }
+
+    public function setPassword(int $id, string $password): void
+    {
+        $this->update($id, ['password' => password_hash($password, PASSWORD_DEFAULT)]);
+    }
 }

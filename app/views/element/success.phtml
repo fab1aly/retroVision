@@ -1,0 +1,18 @@
+<svg class="container"
+    xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="150" height="150" viewBox="0 0 50 50">
+    <path id="svg_path"
+        stroke-width="3" stroke-linecap="round" stroke-dasharray="280" stroke-dashoffset="280" stroke="green" fill="none"
+        d="M 42.964844 8.6894531 A 1.0001 1.0001 0 0 0 42.160156 9.1582031 L 21.699219 40.867188 L 7.671875 28.158203 A 1.0004048 1.0004048 0 1 0 6.328125 29.640625 L 21.228516 43.140625 A 1.0001 1.0001 0 0 0 22.740234 42.941406 L 43.839844 10.242188 A 1.0001 1.0001 0 0 0 42.964844 8.6894531 z">
+    </path>
+    <style>
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        #svg_path {
+            animation: draw 1s forwards;
+        }
+    </style>
+</svg>

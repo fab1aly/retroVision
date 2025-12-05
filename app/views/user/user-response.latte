@@ -1,0 +1,12 @@
+<p id="user_response_status" x-ref="status" x-init="{if $user_request === 'sign_up'}signUp{/if}{if $user_request === 'sign_in'}signIn{/if}{if $user_request === 'sign_forget'}signForget{/if}{if $user_request === 'user_profile'}userProfile{/if}{if $user_request === 'user_delete'}userDelete{/if}Form('{$user_response_status}')}">
+
+    {include '../application/views/element/' . $user_response_status . '.latte'}
+    <span>{$user_response_status|capitalize}</span>
+</p>
+
+{if ($user_request === 'sign_in' && $user_response_status === 'success') || ($user_request === 'user_delete' && $user_response_status === 'success')}
+<!--User Detail Out of Band Swap-->
+{include '../application/views/user/user-element.latte'}
+{else}
+{include '../application/views/user/user-form.latte'}
+{/if}

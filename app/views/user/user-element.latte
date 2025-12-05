@@ -1,0 +1,53 @@
+{* User dropdown menu - shows in header *}
+<details id="user-detail" 
+    class="dropdown"
+    hx-swap-oob="true"
+    x-data="{ openDropdown: false }"
+    x-ref="dropdown"
+    x-on:click.outside="openDropdown = false">
+
+    <summary>
+        {if isset($user)}Account{else}Welcome{/if}
+    </summary>
+    
+    <ul id="user_links">
+        {if isset($user)}
+            {* Logged in user menu *}
+            <li id="user_profile_link">
+                <a href="/user/profile"
+                    hx-boost="true"
+                    hx-push-url="false"
+                    hx-trigger="click"
+                    hx-target="#user_dialog_main"
+                    hx-swap="innerHTML"
+                    hx-vals='{"user_request": "user_profile"}'
+                    x-on:click="$refs.dialog.showModal()"
+                >Profile</a>
+            </li>
+            <li><a href="#">Favorite</a></li>
+            <li><a href="/user/logout">Logout</a></li>
+        {else}
+            {* Guest menu *}
+            <li id="sign_in_link">
+                <a href="/user/sign-in"
+                    hx-boost="true"
+                    hx-push-url="false"
+                    hx-target="#user_dialog_main"
+                    hx-swap="innerHTML"
+                    hx-vals='{"user_request": "sign_in"}'
+                    x-on:click="$refs.dialog.showModal()"
+                >Sign In</a>
+            </li>
+            <li id="sign_up_link">
+                <a href="/user/sign-up"
+                    hx-boost="true"
+                    hx-push-url="false"
+                    hx-target="#user_dialog_main"
+                    hx-swap="innerHTML"
+                    hx-vals='{"user_request": "sign_up"}'
+                    x-on:click="$refs.dialog.showModal()"
+                >Sign Up</a>
+            </li>
+        {/if}
+    </ul>
+</details>

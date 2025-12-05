@@ -1,0 +1,107 @@
+<form id="user_form" 
+    hx-post="/user/{$user_request|replace:'_','-'}"
+    hx-trigger="submit" 
+    hx-target="#user_dialog_main" 
+    hx-swap="innerHTML" 
+    x-ref="form"
+>
+
+    <fieldset>
+        <legend class="container-fluid">
+            {if $user_request === 'sign_up'}Sign Up{/if}
+            {if $user_request === 'sign_in'}Sign In{/if}
+            {if $user_request === 'sign_forget'}Forget Password{/if}
+            {if $user_request === 'user_profile'} Update Profile{/if}
+        </legend>
+
+        {if $user_request === 'sign_up' || $user_request === 'user_profile'}
+        <label for="username_form">
+            Username
+        </label>
+        <input id="username_form" 
+            title="Please enter your username" 
+            type="text" 
+            name="{($user_request !== 'user_profile') ? 'username' : 'new_username'}"
+            placeholder="{($user_request === 'user_profile') ? htmlspecialchars($_SESSION['user']->getUsername()) : ''}" 
+            value="{($_SESSION['formSignData']['username']) ?? ''}" 
+            {if $user_request !== 'user_profile'}required{/if}
+        >
+        {/if}
+
+        <label for="email_form">
+            Email
+        </label>
+        <input id="email_form" 
+            title="Please enter your email" 
+            type="email" 
+            name="{($user_request !== 'user_profile') ? 'email' : 'new_email'}" 
+            placeholder="{($user_request === 'user_profile') ? htmlspecialchars($_SESSION['user']->getEmail()) : 'you@home.me'}" 
+            value="{($_SESSION['formSignData']['email']) ?? ''}" 
+            {if $user_request !== 'user_profile'}required{/if}
+        >
+
+        {if $user_request !== 'sign_forget'}
+        <label for="password_form">
+            {($user_request === 'user_profile') ? 'New Password' : 'Password'}
+        </label>
+        <input id="password_form" 
+            title="Please enter your password" 
+            type="password" 
+            name="{($user_request === 'user_profile') ? 'new_password' : 'password'}" 
+            placeholder="********" 
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(.{l}8,{r})$"
+            value="{$_SESSION['formSignData']['password'] ?? ''}" 
+            {if $user_request !== 'user_profile'}required{/if}
+        >
+        {/if}
+
+        {if $user_request === 'sign_up' || $user_request === 'user_profile'}
+        <label for="password_confirm_form">
+            Confirm
+        </label>
+        <input id="password_confirm_form" 
+            title="Please confirm your password" 
+            type="password" 
+            name="{($user_request !== 'user_profile') ? 'password_confirm' : 'new_password_confirm'}" 
+            placeholder="" 
+            {if $user_request !== 'user_profile'}required{/if}
+        >
+        {/if}
+    </fieldset>
+
+    <button type="submit" hx-on:submit="this.setAttribute('aria-busy','true');">
+        {($user_request === "user_profile") ? 'Update' : 'Submit'}
+    </button>
+
+    <hr>
+
+    {if $user_request === "user_profile"}
+    <button 
+        type="button" 
+        class="pico-background-red-600 pico-color-white" 
+        hx-trigger="click" 
+        hx-delete="/user/profile" 
+        hx-target="#user_dialog_main" 
+        hx-swap="innerHTML" 
+        hx-vals="js:{l}password: prompt('Please enter your password to confirm'){r}" 
+        hx-on:click="" 
+        hx-confirm="Are you sure you want to delete your account?" 
+        hx-on:htmx:after-request="this.setAttribute('aria-busy','true');">
+        <i class="fa-solid fa-arrows-rotate"></i><span>Delete Account</span>
+    </button>
+    {else}
+    <a 
+        href="/user/{if $user_request === 'sign_up'}sign-in{/if}{if $user_request === 'sign_in'}forget{/if}{if $user_request === 'sign_forget'}sign-up{/if}" 
+        hx-boost="true" 
+        hx-push-url="false" 
+        hx-target="#user_dialog_main" 
+        hx-swap="innerHTML">
+        <span>
+            {if $user_request === 'sign_up'}Or sign-in here{/if}
+            {if $user_request === 'sign_in'}Forgot password{/if}
+            {if $user_request === 'sign_forget'}Or sign-up here{/if}
+        </span>
+    </a>
+    {/if}
+
+</form>

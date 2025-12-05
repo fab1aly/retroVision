@@ -12,6 +12,9 @@ final class Template_a5fd904bc1 extends Latte\Runtime\Template
 
 	public function main(array $ʟ_args): void
 	{
+		extract($ʟ_args);
+		unset($ʟ_args);
+
 		echo '<header class="container-fluid">
 <nav>
 	<ul id="nav_logo">
@@ -40,7 +43,10 @@ final class Template_a5fd904bc1 extends Latte\Runtime\Template
 			<button>Trend</button>
 		</li>
 		<li id="nav_menu_user" x-data="{}">
-		</li>
+';
+		$this->createTemplate('../user/user-element.latte', $this->params, 'include')->renderToContentType('html') /* line 29 */;
+		$this->createTemplate('../user/user-dialog.latte', $this->params, 'include')->renderToContentType('html') /* line 30 */;
+		echo '		</li>
 	</ul>
 </nav>
 <hr />

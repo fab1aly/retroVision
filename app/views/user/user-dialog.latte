@@ -1,0 +1,18 @@
+{* User dialog modal *}
+<dialog id="user_dialog"
+    x-ref="dialog"
+    x-on:click.outside="">
+    
+    <article>
+        <header>
+            <button x-on:click="$refs.dialog.close()" aria-label="Close" rel="prev"></button>
+            <p>
+                <strong>{if isset($user)}Account{else}Welcome{/if}</strong>
+            </p>
+        </header>
+
+        <main id="user_dialog_main">
+            {* Content will be loaded dynamically via HTMX *}
+        </main>
+    </article>
+</dialog>

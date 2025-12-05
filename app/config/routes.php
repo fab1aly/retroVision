@@ -16,15 +16,8 @@ $app = Flight::app();
 // This wraps all routes in the group with the SecurityHeadersMiddleware
 $router->group('', function (Router $router) use ($app) {
 
-	$router->get('/', function () use ($app) {
-
-		$app->render('home.latte', [], 'mainContent');
-		$app->render('layout.latte', [
-			'title' => 'retroVision - Home',
-			'mainContent' => Flight::view()->get('mainContent'),
-			'nonce' => $app->get('csp_nonce')
-		]);
-	});
+	$router->get('/', [\app\controllers\HomeController::class, 'home']);
+	$router->post('/', [\app\controllers\HomeController::class, 'home']);
 
 	// $router->get('/hello-world/@name', function ($name) {
 	// 	echo '<h1>Hello world! Oh hey ' . $name . '!</h1>';
@@ -36,16 +29,23 @@ $router->group('', function (Router $router) use ($app) {
 	// 	$router->post('/users/@id:[0-9]', [ApiExampleController::class, 'updateUser']);
 	// });
 
-	// User Auth Routes
-	$router->get('/login', [\app\controllers\UserController::class, 'login']);
-	$router->post('/login', [\app\controllers\UserController::class, 'login']);
+	// User Routes
+	$router->group('/user', function () use ($router) {
+		$router->get('/sign-in', [\app\controllers\UserController::class, 'signIn']);
+		$router->post('/sign-in', [\app\controllers\UserController::class, 'signIn']);
 
-	$router->get('/register', [\app\controllers\UserController::class, 'register']);
-	$router->post('/register', [\app\controllers\UserController::class, 'register']);
+		$router->get('/sign-up', [\app\controllers\UserController::class, 'signUp']);
+		$router->post('/sign-up', [\app\controllers\UserController::class, 'signUp']);
 
-	$router->get('/logout', [\app\controllers\UserController::class, 'logout']);
-	$router->post('/logout', [\app\controllers\UserController::class, 'logout']);
+		$router->get('/profile', [\app\controllers\UserController::class, 'profile']);
+		$router->post('/profile', [\app\controllers\UserController::class, 'profile']);
+		$router->delete('/profile', [\app\controllers\UserController::class, 'profile']);
 
-	$router->get('/profile', [\app\controllers\UserController::class, 'profile']);
+		$router->get('/logout', [\app\controllers\UserController::class, 'signOut']);
+		$router->post('/logout', [\app\controllers\UserController::class, 'signOut']);
+
+		$router->get('/forget', [\app\controllers\UserController::class, 'signForget']);
+		$router->post('/forget', [\app\controllers\UserController::class, 'signForget']);
+	});
 
 }, [SecurityHeadersMiddleware::class]);
